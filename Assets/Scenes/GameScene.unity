@@ -837,6 +837,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1475340122}
+--- !u!114 &1403528535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8858290262752368501, guid: 53b6c10f49e7a57488f329e108044383,
+    type: 3}
+  m_PrefabInstance: {fileID: 2100407308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc91a6a9e6df26547bc61c61cde1c02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1475340120
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,10 +962,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858290262752368501, guid: 53b6c10f49e7a57488f329e108044383,
         type: 3}
+      propertyPath: testing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858290262752368501, guid: 53b6c10f49e7a57488f329e108044383,
+        type: 3}
       propertyPath: kitchenObjectSO
       value: 
       objectReference: {fileID: 11400000, guid: 940768c41148ff549b3d7c802f86b174,
         type: 2}
+    - target: {fileID: 8858290262752368501, guid: 53b6c10f49e7a57488f329e108044383,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9004229725627560892, guid: 53b6c10f49e7a57488f329e108044383,
         type: 3}
       propertyPath: m_RootOrder
@@ -1027,6 +1049,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 8858290262752368501, guid: 53b6c10f49e7a57488f329e108044383,
+        type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858290262752368501, guid: 53b6c10f49e7a57488f329e108044383,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 1403528535}
     - target: {fileID: 9004229725627560892, guid: 53b6c10f49e7a57488f329e108044383,
         type: 3}
       propertyPath: m_RootOrder
