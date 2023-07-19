@@ -12,7 +12,7 @@ namespace Player
 
         public class OnSelectedCounterChangedEventArgs : EventArgs
         {
-            public ClearCounter selectedCounter;
+            public BaseCounter selectedCounter;
         }
     
         public bool IsWalking { get; private set; }
@@ -34,7 +34,7 @@ namespace Player
         [SerializeField] private LayerMask interactionLayer;
 
         private Vector3 _lastInteractionDirection;
-        private ClearCounter _currentSelectedClearCounter;
+        private BaseCounter _currentSelectedBaseCounter;
         
         private KitchenObject _kitchenObject;
 
@@ -45,9 +45,9 @@ namespace Player
 
         private void Interact_Performed(object sender, EventArgs e)
         {
-            if (_currentSelectedClearCounter != null)
+            if (_currentSelectedBaseCounter != null)
             {
-                _currentSelectedClearCounter.Interact(this);
+                _currentSelectedBaseCounter.Interact(this);
             }
         }
 
@@ -106,11 +106,11 @@ namespace Player
         
             if (Physics.Raycast(transform.position, _lastInteractionDirection, out var hit, interactDistance, interactionLayer))
             {
-                if (hit.transform.TryGetComponent(out ClearCounter clearCounter))
+                if (hit.transform.TryGetComponent(out BaseCounter baseCounter))
                 {
-                    if (clearCounter != _currentSelectedClearCounter)
+                    if (baseCounter != _currentSelectedBaseCounter)
                     {
-                        SetSelectedCounter(clearCounter);
+                        SetSelectedCounter(baseCounter);
                     }
                 }
                 else
@@ -124,13 +124,13 @@ namespace Player
             }
         }
 
-        private void SetSelectedCounter(ClearCounter selectedCounter)
+        private void SetSelectedCounter(BaseCounter baseCounter)
         {
-            _currentSelectedClearCounter = selectedCounter;
+            _currentSelectedBaseCounter = baseCounter;
         
             OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
             {
-                selectedCounter = _currentSelectedClearCounter
+                selectedCounter = _currentSelectedBaseCounter
             });
         }
 

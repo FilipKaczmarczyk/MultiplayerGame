@@ -5,8 +5,8 @@ namespace Counters
 {
     public class SelectedCounterVisual : MonoBehaviour
     {
-        [SerializeField] private ClearCounter clearCounter;
-        [SerializeField] private GameObject visualGameObject;
+        [SerializeField] private BaseCounter kitchenObjectParent;
+        [SerializeField] private GameObject[] visualGameObjects;
     
         private void OnEnable()
         {
@@ -20,7 +20,15 @@ namespace Counters
     
         private void PlayerOnOnSelectedCounterChanged(object sender, PlayerController.OnSelectedCounterChangedEventArgs e)
         {
-            visualGameObject.SetActive(e.selectedCounter == clearCounter);
+            ToggleActive(e.selectedCounter == kitchenObjectParent);
+        }
+
+        private void ToggleActive(bool state)
+        {
+            foreach (var visualGameObject in visualGameObjects)
+            {
+                visualGameObject.SetActive(state);
+            }
         }
     }
 }
