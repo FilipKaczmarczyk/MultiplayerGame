@@ -28,6 +28,7 @@ namespace Input
             var inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
             inputVector = inputVector.normalized;
 
+            
             return inputVector;
         }
     }

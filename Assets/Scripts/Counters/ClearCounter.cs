@@ -1,4 +1,3 @@
-using KitchenObjects;
 using KitchenObjects.ScriptableObjects;
 using Player;
 using UnityEngine;
@@ -11,14 +10,27 @@ namespace Counters
         
         public override void Interact(PlayerController player)
         {
-            if (_kitchenObject == null)
+            if (!HasKitchenObject()) // NO KITCHEN OBJECT HERE
             {
-                var kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab, counterTopPoint);
-                kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+                if (player.HasKitchenObject()) // PLAYER IS CARRYING SOMETHING
+                {
+                    player.GetKitchenObject().SetKitchenObjectParent(this);
+                }
+                else // PLAYER IS NOT CARRYING ANYTHING
+                {
+                    
+                }
             }
-            else
+            else // THERE IS KITCHEN OBJECT HERE
             {
-                _kitchenObject.SetKitchenObjectParent(player);
+                if (player.HasKitchenObject()) // PLAYER IS CARRYING SOMETHING
+                {
+                    
+                }
+                else // PLAYER IS NOT CARRYING ANYTHING
+                {
+                    GetKitchenObject().SetKitchenObjectParent(player);
+                }
             }
         }
     }

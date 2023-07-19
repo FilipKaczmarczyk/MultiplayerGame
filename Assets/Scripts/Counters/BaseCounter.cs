@@ -21,7 +21,7 @@ namespace Counters
             _kitchenObject = kitchenObject;
         }
 
-        public KitchenObject ReturnKitchenObject()
+        public KitchenObject GetKitchenObject()
         {
             return _kitchenObject;
         }

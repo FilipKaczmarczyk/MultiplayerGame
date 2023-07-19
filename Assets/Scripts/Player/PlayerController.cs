@@ -60,6 +60,7 @@ namespace Player
         private void HandleMovement(Vector2 inputVector)
         {
             var moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+            var rotateDir = moveDir;
             var moveDistance = moveSpeed * Time.deltaTime;
 
             if (!CanMove(moveDir, moveDistance))
@@ -87,7 +88,7 @@ namespace Player
 
             IsWalking = moveDir != Vector3.zero;
         
-            transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
+            transform.forward = Vector3.Slerp(transform.forward, rotateDir, Time.deltaTime * rotateSpeed);
         }
     
         private bool CanMove(Vector3 direction, float distance)
@@ -144,7 +145,7 @@ namespace Player
             _kitchenObject = kitchenObject;
         }
 
-        public KitchenObject ReturnKitchenObject()
+        public KitchenObject GetKitchenObject()
         {
             return _kitchenObject;
         }

@@ -14,6 +14,9 @@ namespace Counters
 
         public override void Interact(PlayerController player)
         {
+            if (player.HasKitchenObject()) // PLAYER IS CARRYING SOMETHING
+                return;
+            
             var kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
             kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
