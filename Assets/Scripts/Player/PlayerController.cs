@@ -1,11 +1,12 @@
 using System;
 using Counters;
 using Input;
+using KitchenObjects;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IKitchenObjectParent
     {
         public static event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
 
@@ -28,11 +29,14 @@ namespace Player
         [SerializeField] private float rotateSpeed = 10f;
     
         [Header("Interactions settings")]
+        [SerializeField] private Transform kitchenObjectHoldPoint;
         [SerializeField] private float interactDistance = 2f;
         [SerializeField] private LayerMask interactionLayer;
 
         private Vector3 _lastInteractionDirection;
         private ClearCounter _currentSelectedClearCounter;
+        
+        private KitchenObject _kitchenObject;
 
         private void Start()
         {
@@ -43,7 +47,7 @@ namespace Player
         {
             if (_currentSelectedClearCounter != null)
             {
-                _currentSelectedClearCounter.Interact();
+                _currentSelectedClearCounter.Interact(this);
             }
         }
 
@@ -128,6 +132,31 @@ namespace Player
             {
                 selectedCounter = _currentSelectedClearCounter
             });
+        }
+
+        public Transform GetKitchenObjectFollowTransform()
+        {
+            return kitchenObjectHoldPoint;
+        }
+
+        public void SetKitchenObject(KitchenObject kitchenObject)
+        {
+            _kitchenObject = kitchenObject;
+        }
+
+        public KitchenObject ReturnKitchenObject()
+        {
+            return _kitchenObject;
+        }
+
+        public void ClearKitchenObject()
+        {
+            _kitchenObject = null;
+        }
+
+        public bool HasKitchenObject()
+        {
+            return _kitchenObject != null;
         }
     }
 }

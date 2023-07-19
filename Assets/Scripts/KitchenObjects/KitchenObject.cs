@@ -1,4 +1,3 @@
-using Counters;
 using KitchenObjects.ScriptableObjects;
 using UnityEngine;
 
@@ -8,36 +7,36 @@ namespace KitchenObjects
     {
         [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
-        private ClearCounter _clearCounter;
+        private IKitchenObjectParent _kitchenObjectParent;
         
         public KitchenObjectSO GetKitchenObjectSO()
         {
             return kitchenObjectSO;
         }
 
-        public void SetClearCounter(ClearCounter clearCounter)
+        public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
         {
-            if (_clearCounter != null)
+            if (_kitchenObjectParent != null)
             {
-                _clearCounter.ClearKitchenObject();
+                _kitchenObjectParent.ClearKitchenObject();
             }
             
-            _clearCounter = clearCounter;
+            _kitchenObjectParent = kitchenObjectParent;
 
-            if (clearCounter.HasKitchenObject())
+            if (kitchenObjectParent.HasKitchenObject())
             {
                 Debug.LogError("Counter already has kitchen object!");
             }
             
-            _clearCounter.SetKitchenObject(this);
+            _kitchenObjectParent.SetKitchenObject(this);
             
-            transform.parent = clearCounter.GetKitchenObjectFollowTransform();
+            transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
             transform.localPosition = Vector3.zero;
         }
 
-        public ClearCounter GetClearCounter()
+        public IKitchenObjectParent GetKitchenObjectParent()
         {
-            return _clearCounter;
+            return _kitchenObjectParent;
         }
     }
 }
