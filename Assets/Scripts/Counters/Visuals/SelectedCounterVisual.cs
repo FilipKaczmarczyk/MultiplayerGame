@@ -1,7 +1,7 @@
 using Player;
 using UnityEngine;
 
-namespace Counters
+namespace Counters.Visuals
 {
     public class SelectedCounterVisual : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-using KitchenObjects.ScriptableObjects;
+using KitchenObjects;
 using Player;
 using UnityEngine;
 

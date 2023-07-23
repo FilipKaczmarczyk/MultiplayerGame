@@ -1,6 +1,5 @@
 using System;
 using KitchenObjects;
-using KitchenObjects.ScriptableObjects;
 using Player;
 using UnityEngine;
 

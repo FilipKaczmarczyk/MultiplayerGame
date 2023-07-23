@@ -1,4 +1,3 @@
-using KitchenObjects.ScriptableObjects;
 using UnityEngine;
 
 namespace KitchenObjects

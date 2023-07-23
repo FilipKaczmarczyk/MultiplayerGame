@@ -1,14 +1,14 @@
 using System;
 using KitchenObjects;
-using KitchenObjects.ScriptableObjects;
 using Player;
+using Recipes;
 using UnityEngine;
 
 namespace Counters
 {
-    public class CuttingCounter : BaseCounter
+    public class CuttingCounter : BaseCounter, IProgressable
     {
-        public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+        public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
 
         public class OnProgressChangedEventArgs : EventArgs
@@ -33,7 +33,7 @@ namespace Counters
                         _cuttingProgress = 0;
                         var cuttingRecipeSO = GetCuttingRecipeSOForInput(GetKitchenObject().GetKitchenObjectSO());
 
-                        OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                        OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
                         {
                             progressNormalized = (float)_cuttingProgress / cuttingRecipeSO.cuttingProgressMax
                         });
@@ -66,7 +66,7 @@ namespace Counters
                 
                 OnCut?.Invoke(this, EventArgs.Empty);
                 
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
                 {
                     progressNormalized = (float)_cuttingProgress / cuttingRecipeSO.cuttingProgressMax
                 });

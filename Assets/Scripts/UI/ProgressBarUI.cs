@@ -6,19 +6,26 @@ namespace UI
 {
     public class ProgressBarUI : MonoBehaviour
     {
-        [SerializeField] private CuttingCounter cuttingCounter;
+        [SerializeField] private GameObject progressableGameObject;
         [SerializeField] private Image barImage;
-        
+
+        private IProgressable _progressable;
+
+        private void Awake()
+        {
+            _progressable = progressableGameObject.GetComponent<IProgressable>();
+        }
+
         private void Start()
         {
-            cuttingCounter.OnProgressChanged += CuttingCounterOnOnProgressChanged;
+            _progressable.OnProgressChanged += ProgressableOnProgressChanged;
             
             barImage.fillAmount = 0f;
             
             ToggleImage(false);
         }
 
-        private void CuttingCounterOnOnProgressChanged(object sender, CuttingCounter.OnProgressChangedEventArgs e)
+        private void ProgressableOnProgressChanged(object sender, IProgressable.OnProgressChangedEventArgs e)
         {
             barImage.fillAmount = e.progressNormalized;
 
