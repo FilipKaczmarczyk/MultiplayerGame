@@ -41,6 +41,7 @@ namespace Player
         private void Start()
         {
             gameInput.OnInteractAction += Interact_Performed;
+            gameInput.OnInteractAlternateAction += InteractAlternate_Performed;
         }
 
         private void Interact_Performed(object sender, EventArgs e)
@@ -48,6 +49,14 @@ namespace Player
             if (_currentSelectedBaseCounter != null)
             {
                 _currentSelectedBaseCounter.Interact(this);
+            }
+        }
+        
+        private void InteractAlternate_Performed(object sender, EventArgs e)
+        {
+            if (_currentSelectedBaseCounter != null)
+            {
+                _currentSelectedBaseCounter.InteractAlternate(this);
             }
         }
 

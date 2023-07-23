@@ -11,6 +11,9 @@ namespace Counters
         protected KitchenObject _kitchenObject;
     
         public virtual void Interact(PlayerController player) { }
+        
+        public virtual void InteractAlternate(PlayerController player) { }
+        
         public Transform GetKitchenObjectFollowTransform()
         {
             return counterTopPoint;
