@@ -25,7 +25,23 @@ namespace Counters
             {
                 if (player.HasKitchenObject()) // PLAYER IS CARRYING SOMETHING
                 {
-                    
+                    if (player.GetKitchenObject().TryGetPlate(out var plateKitchenObject)) // PLAYER IS CARRYING PLATE
+                    {
+                        if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
+                        {
+                            GetKitchenObject().DestroySelf();
+                        }
+                    }
+                    else // PLAYER IS NOT CARRYING PLATE BUT SOMETHING ELSE
+                    {
+                        if (GetKitchenObject().TryGetPlate(out plateKitchenObject)) // COUNTER IS HOLDING PLATE
+                        {
+                            if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
+                            {
+                                player.GetKitchenObject().DestroySelf();
+                            }
+                        }
+                    }
                 }
                 else // PLAYER IS NOT CARRYING ANYTHING
                 {

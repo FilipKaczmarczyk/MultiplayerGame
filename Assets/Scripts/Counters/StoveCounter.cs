@@ -155,7 +155,25 @@ namespace Counters
             {
                 if (player.HasKitchenObject()) // PLAYER IS CARRYING SOMETHING
                 {
+                    if (player.GetKitchenObject().TryGetPlate(out var plateKitchenObject)) // PLAYER IS CARRYING PLATE
+                    {
+                        if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
+                        {
+                            GetKitchenObject().DestroySelf();
+                            
+                            _currentState = State.Idle;
                     
+                            OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
+                            {
+                                state = State.Idle
+                            });
+                    
+                            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+                            {
+                                progressNormalized = 0f
+                            });
+                        }
+                    }
                 }
                 else // PLAYER IS NOT CARRYING ANYTHING
                 {
