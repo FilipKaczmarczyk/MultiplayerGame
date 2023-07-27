@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class DeliveryManager : MonoBehaviour
 {
+    public event EventHandler OnWaitingRecipesListUpdate;
+    
     public static DeliveryManager Instance { get; private set; }
     [SerializeField] private RecipesSO recipes;
     
@@ -15,7 +17,7 @@ public class DeliveryManager : MonoBehaviour
     
     private readonly List<RecipeSO> _waitingRecipes = new List<RecipeSO>();
 
-    private float _spawnRecipeTimer;
+    private float _spawnRecipeTimer = 4f;
 
     private void Awake()
     {
@@ -26,12 +28,12 @@ public class DeliveryManager : MonoBehaviour
     {
         _spawnRecipeTimer -= Time.deltaTime;
         
-        if (_waitingRecipes.Count >= maxWaitingRecipesAmount)
-            return;
-        
         if (_spawnRecipeTimer <= 0f)
         {
             _spawnRecipeTimer = recipeSpawnTime;
+            
+            if (_waitingRecipes.Count >= maxWaitingRecipesAmount)
+                return;
             
             SpawnWaitingRecipe();
         }
@@ -41,6 +43,8 @@ public class DeliveryManager : MonoBehaviour
     {
         var recipeToSpawn = recipes.allRecipes[Random.Range(0, recipes.allRecipes.Count)];
         _waitingRecipes.Add(recipeToSpawn);
+        
+        OnWaitingRecipesListUpdate?.Invoke(this, EventArgs.Empty);
         
         Debug.Log(recipeToSpawn);
     }
@@ -76,9 +80,22 @@ public class DeliveryManager : MonoBehaviour
                 {
                     Debug.Log("Correct!");
                     _waitingRecipes.RemoveAt(i);
+
+                    OnWaitingRecipesListUpdate?.Invoke(this, EventArgs.Empty);
+                    
                     return;
                 }
             }
         }
+    }
+
+    public int GetMaxWaitingRecipesAmount()
+    {
+        return maxWaitingRecipesAmount;
+    }
+
+    public List<RecipeSO> GetWaitingRecipes()
+    {
+        return _waitingRecipes;
     }
 }

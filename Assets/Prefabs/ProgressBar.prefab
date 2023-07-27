@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 3260231165642528902}
   - component: {fileID: 8494436723258999867}
   m_Layer: 5
-  m_Name: ProgressBarUI
+  m_Name: ProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
