@@ -10,6 +10,8 @@ namespace Counters
             {
                 if (player.GetKitchenObject().TryGetPlate(out var plateKitchenObject)) // PLAYER IS CARRYING PLATE
                 {
+                    DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
+                    
                     player.GetKitchenObject().DestroySelf();
                 }
             }
