@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using KitchenObjects;
 using Recipes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Orders
@@ -12,6 +13,8 @@ namespace Orders
         public event EventHandler OnWaitingRecipesListUpdate;
         public event EventHandler OnRecipeSuccess;
         public event EventHandler OnRecipeFailed;
+
+        public int SuccessDeliveredRecipesAmount { get; private set; }
     
         public static DeliveryManager Instance { get; private set; }
         [SerializeField] private RecipesSO recipes;
@@ -20,7 +23,7 @@ namespace Orders
         [SerializeField] private float recipeSpawnTime = 4f;
         [SerializeField] private int maxWaitingRecipesAmount = 4;
     
-        private readonly List<RecipeSO> _waitingRecipes = new List<RecipeSO>();
+        private readonly List<RecipeSO> _waitingRecipes = new();
 
         private float _spawnRecipeTimer = 4f;
 
@@ -88,7 +91,9 @@ namespace Orders
 
                         OnWaitingRecipesListUpdate?.Invoke(this, EventArgs.Empty);
                         OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
-                    
+
+                        SuccessDeliveredRecipesAmount ++;
+                        
                         return;
                     }
                 }

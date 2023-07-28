@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour
 {
-    public static KitchenGameManager Instance { get; private set; }
-
-    public event EventHandler OnStateChanged;
-    
     private enum State
     {
         WaitingToStart,
@@ -14,7 +10,13 @@ public class KitchenGameManager : MonoBehaviour
         Gameplay,
         GameOver
     }
+    
+    public static KitchenGameManager Instance { get; private set; }
 
+    public event EventHandler OnStateChanged;
+
+    [SerializeField] private float totalGameplayTime = 10f;
+    
     private State _state;
     private float _waitingToStartTimer = 1f;
     private float _countdownToStartTimer = 3f;
@@ -47,6 +49,7 @@ public class KitchenGameManager : MonoBehaviour
                 if (_countdownToStartTimer < 0f)
                 {
                     _state = State.Gameplay;
+                    _gameplayTimer = totalGameplayTime;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
@@ -82,8 +85,18 @@ public class KitchenGameManager : MonoBehaviour
         return _state == State.CountdownToStart;
     }
 
+    public bool IsGameOver()
+    {
+        return _state == State.GameOver;
+    }
+
     public float GetCountdownToStartTime()
     {
         return _countdownToStartTimer;
+    }
+
+    public float GetPlayingTimeNormalized()
+    {
+        return _gameplayTimer / totalGameplayTime;
     }
 }
