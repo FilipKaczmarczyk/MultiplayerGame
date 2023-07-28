@@ -1,0 +1,36 @@
+using Counters;
+using UnityEngine;
+
+namespace Audio
+{
+    public class StoveCounterSound : MonoBehaviour
+    {
+        [SerializeField] private StoveCounter stoveCounter;
+        
+        private AudioSource _audioSource;
+
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            stoveCounter.OnStateChanged += StoveCounterOnStateChanged;
+        }
+
+        private void StoveCounterOnStateChanged(object sender, StoveCounter.OnStateChangedEventArgs e)
+        {
+            var playSound = e.state is StoveCounter.State.Frying or StoveCounter.State.Fried;
+
+            if (playSound)
+            {
+                _audioSource.Play();
+            }
+            else
+            {
+                _audioSource.Pause();
+            }
+        }
+    }
+}

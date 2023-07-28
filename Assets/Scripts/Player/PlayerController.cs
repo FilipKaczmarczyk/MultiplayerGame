@@ -9,6 +9,7 @@ namespace Player
     public class PlayerController : MonoBehaviour, IKitchenObjectParent
     {
         public static event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+        public static event EventHandler OnPickupSomething;
 
         public class OnSelectedCounterChangedEventArgs : EventArgs
         {
@@ -152,6 +153,11 @@ namespace Player
         public void SetKitchenObject(KitchenObject kitchenObject)
         {
             _kitchenObject = kitchenObject;
+
+            if (kitchenObject != null)
+            {
+                OnPickupSomething?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public KitchenObject GetKitchenObject()

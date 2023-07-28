@@ -8,6 +8,7 @@ namespace Counters
 {
     public class CuttingCounter : BaseCounter, IProgressable
     {
+        public static event EventHandler OnAnyCut;
         public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
 
@@ -71,6 +72,7 @@ namespace Counters
                 var cuttingRecipeSO = GetCuttingRecipeSOForInput(GetKitchenObject().GetKitchenObjectSO());
                 
                 OnCut?.Invoke(this, EventArgs.Empty);
+                OnAnyCut?.Invoke(this, EventArgs.Empty);
                 
                 OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
                 {
