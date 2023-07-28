@@ -47,6 +47,9 @@ namespace Player
 
         private void Interact_Performed(object sender, EventArgs e)
         {
+            if (!KitchenGameManager.Instance.IsGamePlaying())
+                return;
+                
             if (_currentSelectedBaseCounter != null)
             {
                 _currentSelectedBaseCounter.Interact(this);
@@ -55,6 +58,9 @@ namespace Player
         
         private void InteractAlternate_Performed(object sender, EventArgs e)
         {
+            if (!KitchenGameManager.Instance.IsGamePlaying())
+                return;
+            
             if (_currentSelectedBaseCounter != null)
             {
                 _currentSelectedBaseCounter.InteractAlternate(this);
