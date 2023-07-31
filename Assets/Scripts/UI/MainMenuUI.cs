@@ -19,7 +19,7 @@ namespace UI
 
             _playButton.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene(sceneBuildIndex: 1);
+                Loader.LoadLoadingSceneAndTargetScene(Loader.Scene.GameScene);
             });
             
             _quitButton.onClick.AddListener(Application.Quit);
