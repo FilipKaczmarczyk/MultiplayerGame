@@ -11,6 +11,12 @@ namespace Player
         public static event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
         public static event EventHandler OnPickupSomething;
 
+        public static void ResetStaticData()
+        {
+            OnSelectedCounterChanged = null;
+            OnPickupSomething = null;
+        }
+
         public class OnSelectedCounterChangedEventArgs : EventArgs
         {
             public BaseCounter selectedCounter;

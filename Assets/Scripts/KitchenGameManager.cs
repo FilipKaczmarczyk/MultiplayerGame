@@ -1,4 +1,5 @@
 using System;
+using Input;
 using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class KitchenGameManager : MonoBehaviour
     public static KitchenGameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
+    public event EventHandler OnPauseEnabled;
+    public event EventHandler OnPauseDisabled;
 
     [SerializeField] private float totalGameplayTime = 10f;
     
@@ -21,6 +24,7 @@ public class KitchenGameManager : MonoBehaviour
     private float _waitingToStartTimer = 1f;
     private float _countdownToStartTimer = 3f;
     private float _gameplayTimer = 10f;
+    private bool _gamePaused;
 
     private void Awake()
     {
@@ -29,6 +33,16 @@ public class KitchenGameManager : MonoBehaviour
         _state = State.WaitingToStart;
     }
 
+    private void Start()
+    {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
+    {
+        TogglePause();
+    }
+    
     private void Update()
     {
         switch (_state)
@@ -66,8 +80,6 @@ public class KitchenGameManager : MonoBehaviour
             
             case State.GameOver:
                 
-                
-                
                 break;
             
             default:
@@ -98,5 +110,21 @@ public class KitchenGameManager : MonoBehaviour
     public float GetPlayingTimeNormalized()
     {
         return _gameplayTimer / totalGameplayTime;
+    }
+    
+    public void TogglePause()
+    {
+        _gamePaused = !_gamePaused;
+
+        Time.timeScale = _gamePaused ? 0f : 1f;
+
+        if (_gamePaused)
+        {
+            OnPauseEnabled?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            OnPauseDisabled?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
