@@ -39,6 +39,8 @@ namespace UI
         [SerializeField] private TextMeshProUGUI gamepadInteractAltText;
         [SerializeField] private TextMeshProUGUI gamepadPauseText;
         [SerializeField] private Transform pressToRebindTransform;
+
+        private Action _onCloseButtonAction;
         
         private void Awake()
         {
@@ -56,7 +58,11 @@ namespace UI
                 UpdateVisual();
             });
             
-            returnButton.onClick.AddListener(Hide);
+            returnButton.onClick.AddListener(() =>
+            {
+                Hide();
+                _onCloseButtonAction();
+            });
             
             // REBIND
             
@@ -108,9 +114,13 @@ namespace UI
             gamepadPauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamepadPause);
         }
 
-        public void Show()
+        public void Show(Action onCloseButtonAction)
         {
             gameObject.SetActive(true);
+            
+            soundEffectVolumeButton.Select();
+
+            _onCloseButtonAction = onCloseButtonAction;
         }
 
         private void Hide()

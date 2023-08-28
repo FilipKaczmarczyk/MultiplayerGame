@@ -24,7 +24,7 @@ namespace UI
             
             optionsButton.onClick.AddListener(() =>
             {
-                OptionsUI.Instance.Show();
+                OptionsUI.Instance.Show(resumeButton.Select);
             });
         }
 
@@ -50,6 +50,11 @@ namespace UI
         private void TogglePauseScreen(bool state)
         {
             gameObject.SetActive(state);
+
+            if (state)
+            {
+                resumeButton.Select();
+            }
         }
     }
 }
