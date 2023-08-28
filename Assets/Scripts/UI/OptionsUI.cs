@@ -25,6 +25,9 @@ namespace UI
         [SerializeField] private Button interactButton;
         [SerializeField] private Button interactAltButton;
         [SerializeField] private Button pauseButton;
+        [SerializeField] private Button gamepadInteractButton;
+        [SerializeField] private Button gamepadInteractAltButton;
+        [SerializeField] private Button gamepadPauseButton;
         [SerializeField] private TextMeshProUGUI moveUpText;
         [SerializeField] private TextMeshProUGUI moveDownText;
         [SerializeField] private TextMeshProUGUI moveLeftText;
@@ -32,6 +35,9 @@ namespace UI
         [SerializeField] private TextMeshProUGUI interactText;
         [SerializeField] private TextMeshProUGUI interactAltText;
         [SerializeField] private TextMeshProUGUI pauseText;
+        [SerializeField] private TextMeshProUGUI gamepadInteractText;
+        [SerializeField] private TextMeshProUGUI gamepadInteractAltText;
+        [SerializeField] private TextMeshProUGUI gamepadPauseText;
         [SerializeField] private Transform pressToRebindTransform;
         
         private void Awake()
@@ -62,6 +68,10 @@ namespace UI
             interactButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Interact); });
             interactAltButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.InteractAlt); });
             pauseButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Pause); });
+            
+            gamepadInteractButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.GamepadInteract); });
+            gamepadInteractAltButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.GamepadInteractAlt); });
+            gamepadPauseButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.GamepadPause); });
         }
 
         private void Start()
@@ -92,6 +102,10 @@ namespace UI
             interactText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Interact);
             interactAltText.text = GameInput.Instance.GetBindingText(GameInput.Binding.InteractAlt);
             pauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
+            
+            gamepadInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamepadInteract);
+            gamepadInteractAltText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamepadInteractAlt);
+            gamepadPauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.GamepadPause);
         }
 
         public void Show()
