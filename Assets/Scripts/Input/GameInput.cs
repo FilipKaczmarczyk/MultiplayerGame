@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
 
 namespace Input
 {
@@ -11,6 +12,7 @@ namespace Input
         public event EventHandler OnInteractAction;
         public event EventHandler OnInteractAlternateAction;
         public event EventHandler OnPauseAction;
+        public event EventHandler OnBindingRebind;
     
         public static GameInput Instance { get; private set; }
 
@@ -166,6 +168,8 @@ namespace Input
                     
                     PlayerPrefs.SetString(PlayerPrefsBindings, _playerInputActions.SaveBindingOverridesAsJson());
                     PlayerPrefs.Save();
+                    
+                    OnBindingRebind?.Invoke(this, EventArgs.Empty);
                 })
                 .Start();
         }

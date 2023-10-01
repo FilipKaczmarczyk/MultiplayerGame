@@ -40,7 +40,7 @@ namespace Orders
             {
                 _spawnRecipeTimer = recipeSpawnTime;
             
-                if (_waitingRecipes.Count >= maxWaitingRecipesAmount)
+                if (_waitingRecipes.Count >= maxWaitingRecipesAmount || !KitchenGameManager.Instance.IsGamePlaying())
                     return;
             
                 SpawnWaitingRecipe();

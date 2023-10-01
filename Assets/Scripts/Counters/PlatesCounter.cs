@@ -25,7 +25,7 @@ namespace Counters
             {
                 _spawnPlateTimer = 0f;
 
-                if (_plateSpawnAmount < maxPlateAmount)
+                if (_plateSpawnAmount < maxPlateAmount && KitchenGameManager.Instance.IsGamePlaying())
                 {
                     _plateSpawnAmount++;
                     OnSpawnPlate?.Invoke(this, EventArgs.Empty);
