@@ -871,7 +871,6 @@ RectTransform:
   - {fileID: 2009824997}
   - {fileID: 852874426}
   - {fileID: 2052717722}
-  - {fileID: 1360730690}
   - {fileID: 526065641}
   - {fileID: 362450867}
   - {fileID: 2073008412}
@@ -5534,6 +5533,8 @@ GameObject:
   m_Component:
   - component: {fileID: 852874426}
   - component: {fileID: 852874427}
+  - component: {fileID: 852874429}
+  - component: {fileID: 852874428}
   m_Layer: 5
   m_Name: GameStartCountdown
   m_TagString: Untagged
@@ -5551,7 +5552,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 718665051}
   m_Father: {fileID: 88554330}
@@ -5574,6 +5575,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownText: {fileID: 718665052}
+--- !u!225 &852874428
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852874425}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &852874429
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852874425}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 85244167463f4754a9ad2277335542a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &872043636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9193,7 +9227,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360730689}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9201,12 +9235,12 @@ RectTransform:
   - {fileID: 1004732097}
   - {fileID: 1729106239}
   - {fileID: 1894127753}
-  m_Father: {fileID: 88554330}
+  m_Father: {fileID: 2052717722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -910, y: -490}
+  m_SizeDelta: {x: 1820, y: 980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1360730691
 MonoBehaviour:
@@ -15726,6 +15760,7 @@ RectTransform:
   m_Children:
   - {fileID: 1252151647}
   - {fileID: 1909203028}
+  - {fileID: 1360730690}
   m_Father: {fileID: 88554330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}

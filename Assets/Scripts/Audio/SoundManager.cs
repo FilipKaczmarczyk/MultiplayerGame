@@ -82,6 +82,11 @@ namespace Audio
         {
             AudioSource.PlayClipAtPoint(audioClipsRef.footstep[Random.Range(0, audioClipsRef.footstep.Length)], position, volumeMultiplier * (Volume * 0.1f));
         }
+        
+        public void PlayCountDownSound()
+        {
+            PlaySound(audioClipsRef.warning, Vector3.zero);
+        }
 
         public void ChangeVolume()
         {
